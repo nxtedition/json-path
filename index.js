@@ -239,12 +239,12 @@ function _patch(oldValue, newValue, isPlainJSON) {
     const newKeys = Object.keys(newValue).filter(
       (key) => newValue[key] !== undefined
     );
+    const oldKeys = Object.keys(oldValue);
 
     if (newKeys.length === 0) {
-      return oldValue;
+      return oldKeys.length === 0 ? oldValue : EMPTY_OBJ;
     }
 
-    const oldKeys = Object.keys(oldValue);
 
     let obj = newKeys.length === oldKeys.length ? null : {};
     for (let i = 0; i < newKeys.length; ++i) {
