@@ -190,7 +190,12 @@ function _merge(oldValue, newValue, isPlainJSON) {
         }
         obj = { ...oldValue };
       }
-      obj[key] = val;
+
+      if (val !== undefined) {
+        obj[key] = val;
+      } else {
+        delete obj[key];
+      }
     }
 
     return obj || oldValue;
@@ -234,11 +239,12 @@ function _patch(oldValue, newValue, isPlainJSON) {
     const newKeys = Object.keys(newValue).filter(
       (key) => newValue[key] !== undefined
     );
-    const oldKeys = Object.keys(oldValue);
 
     if (newKeys.length === 0) {
-      return oldKeys.length === 0 ? oldValue : EMPTY_OBJ;
+      return oldValue;
     }
+
+    const oldKeys = Object.keys(oldValue);
 
     let obj = newKeys.length === oldKeys.length ? null : {};
     for (let i = 0; i < newKeys.length; ++i) {
