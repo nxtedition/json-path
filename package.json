@@ -1,6 +1,6 @@
 {
   "name": "@nxtedition/json-path",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "author": "Robert Nagy <ronagy@icloud.com>",
   "scripts": {
