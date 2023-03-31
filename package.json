@@ -1,0 +1,17 @@
+{
+  "name": "@nxtedition/json-path",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Robert Nagy <ronagy@icloud.com>",
+  "scripts": {
+    "test": "npx jest --bail --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nxtedition/xuid.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
