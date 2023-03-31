@@ -245,7 +245,6 @@ function _patch(oldValue, newValue, isPlainJSON) {
       return oldKeys.length === 0 ? oldValue : EMPTY_OBJ;
     }
 
-
     let obj = newKeys.length === oldKeys.length ? null : {};
     for (let i = 0; i < newKeys.length; ++i) {
       const key = newKeys[i];
