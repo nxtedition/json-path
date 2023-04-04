@@ -207,7 +207,7 @@ function _merge(oldValue, newValue, isPlainJSON) {
 function _patch(oldValue, newValue, isPlainJSON) {
   if (oldValue === newValue) {
     return oldValue;
-  } else if (oldValue === null || newValue === null) {
+  } else if (oldValue == null || newValue == null) {
     return isPlainJSON ? newValue : jsonClone(newValue);
   } else if (Array.isArray(oldValue) && Array.isArray(newValue)) {
     if (newValue.length === 0) {
