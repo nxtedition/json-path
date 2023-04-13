@@ -1,13 +1,26 @@
-const assert = require("node:assert");
 const fp = require("lodash/fp");
 
 const PARTS_REG_EXP = /([^.[\]\s]+)/g;
 
 const cache = new Map();
 
+/**
+ * @readonly
+ * @const {Object}
+ * */
 const EMPTY_OBJ = Object.freeze({});
+/**
+ * @readonly
+ * @const {Array}
+ * */
 const EMPTY_ARR = Object.freeze([]);
 
+/**
+ *
+ * @param {Object} data
+ * @param {string} [path]
+ * @returns {*}
+ */
 function get(data, path) {
   data = data || EMPTY_OBJ;
 
@@ -47,9 +60,20 @@ function stringify(value) {
   }
 }
 
+/**
+ *
+ * @param {Object} data
+ * @param {string} [path]
+ * @param {*} value
+ * @param {boolean} [isPlainJSON]
+ * @returns {*}
+ */
 function set(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
-  assert(typeof data === "object", "data must be object or null");
+
+  if (typeof data !== "object") {
+    throw new Error('data must be object or null')
+  }
 
   if (!path) {
     return _patch(data, value, isPlainJSON);
@@ -86,9 +110,20 @@ function set(data, path, value, isPlainJSON = false) {
   return result;
 }
 
+/**
+ *
+ * @param {Object} data
+ * @param {string} [path]
+ * @param {*} value
+ * @param {boolean} [isPlainJSON]
+ * @returns {*}
+ */
 function merge(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
-  assert(typeof data === "object", "data must be object or null");
+
+  if (typeof data !== "object") {
+    throw new Error('data must be object or null')
+  }
 
   if (!path) {
     if (value == null || typeof value !== "object") {
