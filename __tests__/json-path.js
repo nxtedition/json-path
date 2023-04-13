@@ -368,4 +368,14 @@ describe("plain JSON", () => {
     const res = jsonPath.set(y, "time", undefined);
     expect(Object.keys(res)).toEqual([]);
   });
+
+  it("setting empty does not modify", () => {
+    const y = {
+      a: [],
+      b: {},
+    };
+
+    expect(jsonPath.set(y, "a", [])).toBe(y);
+    expect(jsonPath.set(y, "b", {})).toBe(y);
+  });
 });

@@ -56,9 +56,7 @@ function set(data, path, value, isPlainJSON = false) {
   }
 
   const oldValue = get(data, path);
-  const newValue = value == null
-    ? value
-    : _patch(oldValue, value, isPlainJSON);
+  const newValue = value == null ? value : _patch(oldValue, value, isPlainJSON);
 
   if (newValue === oldValue) {
     return data;
@@ -100,9 +98,7 @@ function merge(data, path, value, isPlainJSON = false) {
   }
 
   const oldValue = get(data, path);
-  const newValue = value == null
-    ? value
-    : _merge(oldValue, value, isPlainJSON);
+  const newValue = value == null ? value : _merge(oldValue, value, isPlainJSON);
 
   if (newValue === oldValue) {
     return data;
@@ -198,7 +194,7 @@ function _merge(oldValue, newValue, isPlainJSON) {
       }
 
       if (val === undefined) {
-        delete obj[key]
+        delete obj[key];
       } else {
         obj[key] = val;
       }
@@ -216,7 +212,7 @@ function _patch(oldValue, newValue, isPlainJSON) {
   } else if (oldValue == null || newValue == null) {
     return isPlainJSON ? newValue : jsonClone(newValue);
   } else if (Array.isArray(oldValue) && Array.isArray(newValue)) {
-    if (newValue.length === 0) {
+    if (newValue === EMPTY_ARR) {
       return EMPTY_ARR;
     }
 
@@ -260,7 +256,7 @@ function _patch(oldValue, newValue, isPlainJSON) {
       const val = _patch(oldValue[key], newValue[key], isPlainJSON);
 
       if (val === undefined) {
-        continue
+        continue;
       }
 
       numKeys++;
@@ -272,7 +268,7 @@ function _patch(oldValue, newValue, isPlainJSON) {
         obj = {};
         for (let j = 0; j < i; j++) {
           const key = newKeys[j];
-          const val = oldValue[key]
+          const val = oldValue[key];
           obj[key] = val;
         }
       }
