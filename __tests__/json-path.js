@@ -379,3 +379,10 @@ describe("plain JSON", () => {
     expect(jsonPath.set(y, "b", {})).toBe(y);
   });
 });
+
+it('array w path', async () => {
+  const y = { asd: [{ title: 'hello', duration: 120, artist: 'world' }] };
+  const x = { asd: [{ title: 'hello', artist: 'world' }] };
+
+  expect(jsonPath.set(y, "asd", [{ title: 'hello', duration: undefined, artist: 'world' }])).toStrictEqual(x);
+});
