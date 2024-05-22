@@ -96,6 +96,18 @@ describe("set", () => {
     );
     expect(val1).toBe(val2);
   });
+
+  it("set object with undefined2", () => {
+    const val1 = {};
+    const val2 = jsonPath.set(
+      val1,
+      null,
+      { locks: undefined, replicas: [ 'dev' ], error: undefined },
+      false,
+    );
+    expect(val2).toEqual({ replicas: [ 'dev' ] });
+  });
+
 });
 
 describe("order", () => {
