@@ -72,7 +72,7 @@ function set(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
 
   if (typeof data !== "object") {
-    throw new Error("data must be object or null");
+    throw new Error('data must be object or null')
   }
 
   if (!path) {
@@ -122,7 +122,7 @@ function merge(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
 
   if (typeof data !== "object") {
-    throw new Error("data must be object or null");
+    throw new Error('data must be object or null')
   }
 
   if (!path) {
@@ -276,6 +276,7 @@ function _patch(oldValue, newValue, isPlainJSON) {
       return EMPTY_OBJ;
     }
 
+
     const newKeys = Object.keys(newValue);
     const oldKeys = Object.keys(oldValue);
 
@@ -294,10 +295,11 @@ function _patch(oldValue, newValue, isPlainJSON) {
       }
 
       if (!obj) {
-        if (
-          val === oldValue[key] &&
-          (val === undefined || key === oldKeys[i])
-        ) {
+        if (val !== undefined && val === oldValue[key] && key === oldKeys[i]) {
+          continue;
+        }
+
+        if (val === undefined && !Object.hasOwn(oldValue, key)) {
           continue;
         }
 
@@ -305,7 +307,9 @@ function _patch(oldValue, newValue, isPlainJSON) {
         for (let j = 0; j < i; j++) {
           const key = newKeys[j];
           const val = oldValue[key];
-          obj[key] = val;
+          if (val !== undefined) {
+            obj[key] = val;
+          }
         }
       }
 

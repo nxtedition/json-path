@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "Robert Nagy <ronagy@icloud.com>",
   "scripts": {
-    "test": "npx jest --bail --watchAll"
+    "test": "npx jest __tests__ && node --test"
   },
   "repository": {
     "type": "git",

@@ -101,13 +101,23 @@ describe("set", () => {
     const val1 = {};
     const val2 = jsonPath.set(
       val1,
-      null,
+      undefined,
       { locks: undefined, replicas: [ 'dev' ], error: undefined },
       false,
     );
     expect(val2).toEqual({ replicas: [ 'dev' ] });
   });
 
+  it("set object with undefined3", () => {
+    const val1 = { locks: undefined, replicas: [ 'dev1' ] };
+    const val2 = jsonPath.set(
+      val1,
+      null,
+      { locks: undefined, replicas: [ 'dev' ], error: undefined },
+      false,
+    );
+    expect(val2).toEqual({ replicas: [ 'dev' ] });
+  });
 });
 
 describe("order", () => {
