@@ -11,7 +11,7 @@ describe("equality", () => {
       null,
       {
         obj,
-      }
+      },
     );
 
     expect(res.obj).toBe(obj);
@@ -51,7 +51,7 @@ describe("set", () => {
         asd: null,
       },
       "asd.foo.bar",
-      true
+      true,
     );
     expect(res).toEqual({
       asd: { foo: { bar: true } },
@@ -87,10 +87,15 @@ describe("set", () => {
   });
 
   it("set object with undefined", () => {
-    const val1 = { replicas: ['dev1'] }
-    const val2 = jsonPath.set(val1, null, { replicas: ['dev1'], locks: undefined }, false)
-    expect(val1).toBe(val2)
-  })
+    const val1 = { replicas: ["dev1"] };
+    const val2 = jsonPath.set(
+      val1,
+      null,
+      { replicas: ["dev1"], locks: undefined },
+      false,
+    );
+    expect(val1).toBe(val2);
+  });
 });
 
 describe("order", () => {
@@ -144,7 +149,7 @@ describe("paths are tokenized and retrieved correctly", () => {
 
   it("retrieves nested paths", () => {
     expect(jsonPath.get(testRecord._$data, "address.street")).toBe(
-      "currentStreet"
+      "currentStreet",
     );
   });
 
@@ -164,13 +169,13 @@ describe("paths are tokenized and retrieved correctly", () => {
 
   it("retrieves values from objects within arrays", () => {
     expect(jsonPath.get(testRecord._$data, "pastAddresses[0].postCode")).toBe(
-      1001
+      1001,
     );
   });
 
   it("handles whitespace", () => {
     expect(
-      jsonPath.get(testRecord._$data, " pastAddresses[ 1 ].postCode ")
+      jsonPath.get(testRecord._$data, " pastAddresses[ 1 ].postCode "),
     ).toBe(2002);
   });
 
@@ -192,7 +197,7 @@ describe("paths are tokenized and retrieved correctly", () => {
 
   it("returns undefined for negative array indices", () => {
     expect(jsonPath.get(testRecord._$data, "pastAddresses[-1]")).toBe(
-      undefined
+      undefined,
     );
   });
 
@@ -204,11 +209,11 @@ describe("paths are tokenized and retrieved correctly", () => {
 
   it("detects changes to arrays", () => {
     expect(jsonPath.get(testRecord._$data, "pastAddresses[1].street")).toBe(
-      "secondstreet"
+      "secondstreet",
     );
     testRecord._$data.pastAddresses.pop();
     expect(jsonPath.get(testRecord._$data, "pastAddresses[1].street")).toBe(
-      undefined
+      undefined,
     );
   });
 });
@@ -237,10 +242,10 @@ describe("objects are created from paths and their value is set correctly", () =
     record._$data = jsonPath.set(
       record._$data,
       "pastAddresses[1].street",
-      "someStreet"
+      "someStreet",
     );
     expect(jsonPath.get(record._$data, "pastAddresses[1].street")).toBe(
-      "someStreet"
+      "someStreet",
     );
     expect(record._$data).toEqual({
       pastAddresses: [
@@ -362,7 +367,7 @@ describe("plain JSON", () => {
       {
         date,
       },
-      false
+      false,
     );
     expect(res.date).toEqual(date.toISOString());
   });
@@ -386,16 +391,20 @@ describe("plain JSON", () => {
   });
 });
 
-it('array w path', async () => {
-  const y = { asd: [{ title: 'hello', duration: 120, artist: 'world' }] };
-  const x = { asd: [{ title: 'hello', artist: 'world' }] };
+it("array w path", async () => {
+  const y = { asd: [{ title: "hello", duration: 120, artist: "world" }] };
+  const x = { asd: [{ title: "hello", artist: "world" }] };
 
-  expect(jsonPath.set(y, "asd", [{ title: 'hello', duration: undefined, artist: 'world' }])).toStrictEqual(x);
+  expect(
+    jsonPath.set(y, "asd", [
+      { title: "hello", duration: undefined, artist: "world" },
+    ]),
+  ).toStrictEqual(x);
 });
 
-it('undefined keys', async () => {
-  const y = { title: 'hello' };
-  const x = { title: 'hello', artist: undefined };
+it("undefined keys", async () => {
+  const y = { title: "hello" };
+  const x = { title: "hello", artist: undefined };
 
   expect(jsonPath.set(y, x)).toBe(y);
 });
