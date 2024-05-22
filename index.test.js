@@ -45,3 +45,9 @@ test("undefined set4", () => {
   );
   assert.equal(val1, val2);
 });
+
+test("bad array index", () => {
+  const val1 = [1, 2, 3, undefined];
+  const val2 = jsonPath.set(val1, "foo[2]", 4, false);
+  assert.equal(val2, [1, 2, 3, null]);
+});
