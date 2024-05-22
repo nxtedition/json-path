@@ -72,7 +72,7 @@ function set(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
 
   if (typeof data !== "object") {
-    throw new Error('data must be object or null')
+    throw new Error("data must be object or null");
   }
 
   if (!path) {
@@ -122,7 +122,7 @@ function merge(data, path, value, isPlainJSON = false) {
   data = data || EMPTY_OBJ;
 
   if (typeof data !== "object") {
-    throw new Error('data must be object or null')
+    throw new Error("data must be object or null");
   }
 
   if (!path) {
@@ -275,7 +275,6 @@ function _patch(oldValue, newValue, isPlainJSON) {
     if (newValue === EMPTY_OBJ) {
       return EMPTY_OBJ;
     }
-
 
     const newKeys = Object.keys(newValue);
     const oldKeys = Object.keys(oldValue);
