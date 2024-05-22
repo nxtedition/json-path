@@ -276,6 +276,7 @@ function _patch(oldValue, newValue, isPlainJSON) {
       return EMPTY_OBJ;
     }
 
+
     const newKeys = Object.keys(newValue);
     const oldKeys = Object.keys(oldValue);
 
@@ -294,9 +295,10 @@ function _patch(oldValue, newValue, isPlainJSON) {
       }
 
       if (!obj) {
-        if (val === oldValue[key] && key === oldKeys[i]) {
+        if (val === oldValue[key] && (val === undefined || key === oldKeys[i])) {
           continue;
         }
+
         obj = {};
         for (let j = 0; j < i; j++) {
           const key = newKeys[j];

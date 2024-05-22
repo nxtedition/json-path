@@ -85,6 +85,12 @@ describe("set", () => {
     const res = jsonPath.set({}, null, [], true);
     expect(res).toEqual([]);
   });
+
+  it("set object with undefined", () => {
+    const val1 = { replicas: ['dev1'] }
+    const val2 = jsonPath.set(val1, null, { replicas: ['dev1'], locks: undefined }, false)
+    expect(val1).toBe(val2)
+  })
 });
 
 describe("order", () => {
@@ -385,4 +391,11 @@ it('array w path', async () => {
   const x = { asd: [{ title: 'hello', artist: 'world' }] };
 
   expect(jsonPath.set(y, "asd", [{ title: 'hello', duration: undefined, artist: 'world' }])).toStrictEqual(x);
+});
+
+it('undefined keys', async () => {
+  const y = { title: 'hello' };
+  const x = { title: 'hello', artist: undefined };
+
+  expect(jsonPath.set(y, x)).toBe(y);
 });
