@@ -34,3 +34,14 @@ test("undefined set3", () => {
   );
   assert.equal(val1, val2);
 });
+
+test("undefined set4", () => {
+  const val1 = { replicas: ["dev1"] };
+  const val2 = jsonPath.set(
+    val1,
+    null,
+    { locks: undefined, replicas: ["dev1"], error: undefined },
+    false,
+  );
+  assert.equal(val1, val2);
+});
